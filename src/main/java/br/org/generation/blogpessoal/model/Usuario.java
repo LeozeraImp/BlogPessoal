@@ -38,14 +38,15 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
+	
 
 	/**
 	 * Construtor com atributos da Classe Usuario
 	 * 
 	 *  *** Não adicionar o atributo postagem ***
 	 */
-	public Usuario(long id, String nome, String usuario, String senha) {
-		
+	public Usuario(long id, String nome, String usuario, String senha) 
+	{
 		this.id = id;
 		this.nome = nome;
 		this.usuario = usuario;
@@ -53,11 +54,7 @@ public class Usuario {
 		
 	}
 
-	/**
-	 * Construtor sem atributos da Classe Usuario
-	 * 
-	 * Será utilizado para gerar Objetos Nulos
-	 */
+
 	public Usuario() { }
 	
 

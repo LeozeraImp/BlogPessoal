@@ -49,18 +49,19 @@ public class UsuarioService {
 		return Optional.empty();
 	}	
 	
-	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin)
-	{
+	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
+
 		Optional<Usuario> usuario = usuarioRepository.findByUsuario(usuarioLogin.get().getUsuario());
 		
-		if(usuario.isPresent())
-		{
-			if(compararSenha(usuarioLogin.get().getSenha(), usuario.get().getSenha()))
-			{
-				usuarioLogin.get().setId(usuario.get().getId());
+		if(usuario.isPresent()) {
+			if(compararSenha(usuarioLogin.get().getSenha(), usuario.get().getSenha())) {
+				
+				String token = gerarBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha());
+
+				usuarioLogin.get().setId(usuario.get().getId());				
 				usuarioLogin.get().setNome(usuario.get().getNome());
 				usuarioLogin.get().setSenha(usuario.get().getSenha());
-				usuarioLogin.get().setToken(gerarBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha()));
+				usuarioLogin.get().setToken(token);
 				
 				return usuarioLogin;
 			}

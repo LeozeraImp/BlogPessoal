@@ -32,7 +32,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@GetMapping
+	@GetMapping("/listar")
 	public ResponseEntity<List<Usuario>> getAll() {
 		return ResponseEntity.ok(usuarioRepository.findAll());
 	}
@@ -60,4 +60,6 @@ public class UsuarioController {
 				.map(respostaAutenticacao -> ResponseEntity.status(HttpStatus.OK).body(respostaAutenticacao))
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
+	
+	
 }
